@@ -74,3 +74,23 @@ RUN . ~/.profile
 RUN ./waf configure --board CubeBlack
 RUN ./waf copter
 
+
+#install gazebo plugin for ardupilot master
+
+RUN cd ~
+RUN git clone https://github.com/khancyr/ardupilot_gazebo.git
+RUN cd ardupilot_gazebo
+
+#build and install plugin
+
+RUN mkdir build
+RUN cd build
+RUN cmake ..
+RUN make -j4
+RUN sudo make install
+RUN echo 'source /usr/share/gazebo/setup.sh' >> ~/.bashrc
+
+#Set paths for models
+RUN echo 'export GAZEBO_MODEL_PATH=~/ardupilot_gazebo/models' >> ~/.bashrc
+RUN . ~/.bashrc
+
