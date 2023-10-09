@@ -51,7 +51,6 @@ RUN apt-get install -y gitk git-gui
 
 #clone ardupilot
 RUN apt-get update && apt-get install -y sudo
-RUN sudo apt-get --assume-yes update
 RUN sudo apt-get -y update
 RUN git clone https://github.com/ArduPilot/ardupilot.git
 RUN cd ardupilot && git submodule update --init --recursive
