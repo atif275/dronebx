@@ -1,1 +1,1 @@
-docker run -it -p 12345:10000 dronebx run_in_xpra xterm
+docker run -it -p 12345:10000 -v`pwd`/src:/src dronebx run_in_xpra xterm
