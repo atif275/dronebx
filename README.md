@@ -24,3 +24,12 @@ brew install xpra
 2. Down grading xpra to 4.4.9,23 using brew
     brew edit xpra
     HOMEBREW_NO_INSTALL_FROM_API=1 brew reinstall xpra
+
+
+# Run Gazebo to launch  drone world
+
+gazebo --verbose ~/ardupilot_gazebo/worlds/iris_arducopter_runway.world
+
+In another Terminal (Terminal 2), run SITL:
+cd ~/ardupilot/ArduCopter/
+sim_vehicle.py -v ArduCopter -f gazebo-iris --console
