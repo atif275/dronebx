@@ -83,6 +83,10 @@ WORKDIR /src/ardupilot
 RUN cd ardupilot && Tools/environment_install/install-prereqs-ubuntu.sh -y
 RUN . ~/.profile
 
+RUN ./waf configure --board CubeBlack
+RUN ./waf copter
+
+
 
 # add waf alias to ardupilot waf to .ardupilot_env
 RUN echo "alias waf=\"/${USER_NAME}/waf\"" >> ~/.ardupilot_env
