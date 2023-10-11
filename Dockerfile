@@ -121,6 +121,7 @@ RUN echo 'source /usr/share/gazebo/setup.sh' >> ~/.bashrc
 
 #Set paths for models
 RUN echo 'export GAZEBO_MODEL_PATH=~/ardupilot_gazebo/models' >> ~/.bashrc
+RUN cd 'pwd'
 RUN . ~/.bashrc
 
 
