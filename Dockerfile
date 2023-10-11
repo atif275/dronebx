@@ -107,7 +107,7 @@ ENV BUILDLOGS=/tmp/buildlogs
 #install gazebo plugin for ardupilot master
 
 #RUN cd /Users/ATIFHANIF/Downloads/dronebx-main
-RUN cd /Users/ATIFHANIF/Downloads/dronebx-main && sudo git clone https://github.com/khancyr/ardupilot_gazebo.git 
+RUN sudo git clone https://github.com/khancyr/ardupilot_gazebo.git 
 RUN cd ardupilot_gazebo
 
 #build and install plugin
