@@ -1,12 +1,12 @@
 
-to build
+# to build
 
 ```bash
 . ./b.sh
 ```
 
 
-to run
+# to run
 
 ```bash
 . ./run.sh
