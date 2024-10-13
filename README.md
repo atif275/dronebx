@@ -1,18 +1,48 @@
 
 to build
 
+```bash
 . ./b.sh
+```
+
 
 to run
 
+```bash
+. ./run.sh
+```
+
+
+
+# For ardupilot:
+
+
+```bash
+cd ardupilot/ArduCopter
+```
+
+For SITL ardupilot:
+
+```bash
+sudo ../Tools/autotest/sim_vehicle.py -v ArduCopter -f gazebo-iris
+```
+
+In Another Terminal Run this command to access the running dronebx-container (Navigate to dronebx):
+
+```bash
 . ./r.sh
+```
 
-to see on your mac -- on your mac run the following in a saperate terminal
+Run MAVProxy in a new Xterm window from the second terminal (inside the running container):
 
-. ./run_in_xpra
+```bash
+sudo xterm -e "mavproxy.py --master=tcp:127.0.0.1:5760 --console --map" &
+```
 
-once you run the above you should see xterm pop on your your screen
-in the xterm you can type and run gazebo
+
+
+once you run the above you should see two xterm pop on your your screen
+one is for serial ports data and other is mavproxy console
 
 # on your mac
 

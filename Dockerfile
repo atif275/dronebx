@@ -70,7 +70,13 @@ ENV USER=${USER_NAME}
 RUN echo "ardupilot ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${USER_NAME}
 RUN chmod 0440 /etc/sudoers.d/${USER_NAME}
 
-RUN git clone https://github.com/ArduPilot/ardupilot.git
+RUN apt-get install -y python3-pip
+RUN pip3 install MAVProxy
+RUN python3 -m pip install empy==3.3.4
+
+# RUN git clone https://github.com/ArduPilot/ardupilot.git
+RUN git clone --depth 1 https://github.com/ArduPilot/ardupilot.git
+
 RUN cd ardupilot && git submodule update --init --recursive
 
 #RUN chown -R ${USER_NAME}:${USER_NAME} /${USER_NAME}
@@ -83,8 +89,8 @@ WORKDIR /src/ardupilot
 RUN cd ardupilot && Tools/environment_install/install-prereqs-ubuntu.sh -y
 RUN . ~/.profile
 
-RUN ./waf configure --board CubeBlack
-RUN ./waf copter
+# RUN ./waf configure --board CubeBlack
+# RUN ./waf copter
 
 
 
@@ -107,6 +113,14 @@ RUN export ARDUPILOT_ENTRYPOINT="/home/${USER_NAME}/ardupilot_entrypoint.sh" \
 ENV BUILDLOGS=/tmp/buildlogs
 
 
+# Switch to root to write to /etc/apt/sources.list.d/
+USER root
+RUN sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
+RUN wget http://packages.osrfoundation.org/gazebo.key -O - | apt-key add -
+RUN apt update && apt-get install gazebo11 libgazebo11-dev -y
+
+# Switch back to the ardupilot user
+USER ${USER_NAME}
 
 #install gazebo plugin for ardupilot master
 
@@ -125,7 +139,7 @@ RUN echo 'source /usr/share/gazebo/setup.sh' >> ~/.bashrc
 
 #Set paths for models
 RUN echo 'export GAZEBO_MODEL_PATH=~/ardupilot_gazebo/models' >> ~/.bashrc
-RUN cd 'pwd'
+# RUN cd 'pwd'
 RUN . ~/.bashrc
 
 
